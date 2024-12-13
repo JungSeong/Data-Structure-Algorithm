@@ -7,15 +7,8 @@
 
 int main()
 {
-    int N, temp;
-    std::cin >> N;
-
-    int arr[N];
-    
-    for (int i=0; i<N; i++)
-    {
-        std::cin >> arr[i];
-    }
+    int arr[8] = {1,3,4,2,5,9,0,10};
+    int temp;
 
     for (int i=0; i<sizeof(arr)/sizeof(int)-1; i++)
     {
