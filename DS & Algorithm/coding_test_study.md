@@ -35,6 +35,8 @@
 | Red-Black Tree      | O(log n)            | O(log n)            | O(log n)            | O(log n)            | O(log n)            | O(log n)            |
 | AVL Tree            | O(log n)            | O(log n)            | O(log n)            | O(log n)            | O(log n)            | O(log n)            |
 
+# 정렬
+
 ## 2751.cpp
 배열의 사이즈가 1,000,000이 되자 Segmentation fault 에러가 떴음. 배열의 크기를 너무 크게 하면 안되는 것으로 보이며, <vector> 자료구조를 사용해야 하는 것으로 보인다.<br>
 std::sort 자료구조의 경우 시간 복잡도가 **nlogn**이 된다.<br>
@@ -44,3 +46,21 @@ std::endl의 경우 줄 바꿈 뿐만 아니라 스트림의 버퍼를 비운는
 ## 10989.cpp
 수의 범위가 작을 때에는 카운팅 정렬을 사용하는 것이 속도가 더 빠르다. (본 문제에서는 10,000보다 작거나 같은 자연수)<br>
 
+## 1427.cpp
+문자 -> 정수로 변환 이후 sort 하는 간단한 문제<br>
+문자열의 길이 : num.length(), 벡터의 크기 : v.size() 로 구한다<br>
+문자를 숫자로 바꾸기 : '문자' - '0'을 하면 된다.<br>
+내림차순으로 정렬 : compare() 함수 구현 후 sort(v.begin(), v.end(), compare)로 인자로 넣기
+
+## 11650.cpp
+2차원 배열을 정렬하기 위해서는 vector을 사용해야 한다.<br>
+pair 클래스 : 2차원 좌표 저장에 유용하게 사용됨, #include <utility>를 통해 불러올 수 있음<br>
+
+생성 : pair <type1, type2> pv<br>
+초기화 : make_pair(pv_x, pv_2)<br>
+
+인자의 첫 번째 값 : pv_x.first<br>
+인자의 두 번째 값 : pv_x.second<br>
+
+오름차순 정렬은 기본, sort(pv.begin(), pv.end()) 하면 된다<br>
+내림차순 정렬을 원하면 sort(pv.begin(), pv.end(), greater<pair<int, int>>()) 로 선언
