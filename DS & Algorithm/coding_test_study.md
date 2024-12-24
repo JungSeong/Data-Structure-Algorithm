@@ -52,7 +52,7 @@ std::endl의 경우 줄 바꿈 뿐만 아니라 스트림의 버퍼를 비운는
 문자를 숫자로 바꾸기 : '문자' - '0'을 하면 된다.<br>
 내림차순으로 정렬 : compare() 함수 구현 후 sort(v.begin(), v.end(), compare)로 인자로 넣기
 
-## 11650.cpp
+## 11650.cpp & 11651.cpp
 2차원 배열을 정렬하기 위해서는 vector을 사용해야 한다.<br>
 pair 클래스 : 2차원 좌표 저장에 유용하게 사용됨, #include <utility>를 통해 불러올 수 있음<br>
 
@@ -64,3 +64,34 @@ pair 클래스 : 2차원 좌표 저장에 유용하게 사용됨, #include <util
 
 오름차순 정렬은 기본, sort(pv.begin(), pv.end()) 하면 된다<br>
 내림차순 정렬을 원하면 sort(pv.begin(), pv.end(), greater<pair<int, int>>()) 로 선언
+
+bool cmp(pair<int, int> a, pair<int, int> b)
+{
+    if (a.second != b.second) // y 좌표가 다르면
+    {
+        return a.second < b.second; // y 좌표를 기준으로 오름차순 정렬
+    }
+    else
+    {
+        return a.first < b.first; // x 좌표를 기준으로 오름차순 정렬
+    }
+}
+
+## 1181.cpp
+
+문자열을 길이가 짧은 것부터, 길이가 같다면 사전 순으로 정렬하는 방법
+
+bool cmp (string str1, string str2)
+{
+    if (str1.length() != str2.length())
+    {
+        return str1.length() < str2.length(); // 문자열의 길이가 다르면, 문자열의 길이를 기준으로 오름차순 정렬 한다.
+    }
+    else
+    {
+        return str1 < str2; // 문자열의 길이가 같으면, 벡터를 사전 순서대로 정렬 한다.
+    }
+}
+
+std::unique -> algorithm 헤더에 존재, 배열에서 중복되지 않는 원소들을 앞에서부터 채워나가되,중복되는 요소는 그 이후로 존재하게끔 한다. 이후 새로운 끝 위치 (=중복된 원소들이 있는 첫 위치)를 반환하게 된다.
+vector::erase -> vector에서 특정 원소들을 삭제하는 함수
