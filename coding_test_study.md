@@ -95,3 +95,5 @@ bool cmp (string str1, string str2)
 
 std::unique -> algorithm 헤더에 존재, 배열에서 중복되지 않는 원소들을 앞에서부터 채워나가되,중복되는 요소는 그 이후로 존재하게끔 한다. 이후 새로운 끝 위치 (=중복된 원소들이 있는 첫 위치)를 반환하게 된다.
 vector::erase -> vector에서 특정 원소들을 삭제하는 함수
+
+vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
