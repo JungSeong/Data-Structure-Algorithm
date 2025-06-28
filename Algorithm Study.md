@@ -12,7 +12,6 @@
 |----------|:---:|:---:|:---:|:---:|
 ||최악|최선|평균|최악|
 |Bubble Sort|O(1)|O(n)|O(n^2)|O(n^2)|
-|Heap Sort|O(1)|O(nlogn)|O(nlogn)|O(nlogn)|
 |Insertion Sort|O(1)|O(n)|O(n^2)|O(n^2)|
 |Merge Sort|O(n)|O(nlogn)|O(nlogn)|O(nlogn)|
 |Quick Sort|O(logn)|O(nlogn)|O(nlogn)|O(n^2)|
