@@ -4,7 +4,6 @@ using namespace std;
 
 int N, M;
 int arr[9];
-bool isUsed[9] = {false};
 
 void BackTracking(int k)
 {
@@ -19,13 +18,8 @@ void BackTracking(int k)
 	}
 	for (int i=1; i<=N; i++)
 	{
-        if (isUsed[i] == false || arr[k] == i)
-        {
-            arr[k+1] = i;
-            isUsed[i] = true;
-            BackTracking(k+1);
-            isUsed[i] = false;
-        }		
+        arr[k+1] = i;
+        BackTracking(k+1);	
 	}
 }
 
