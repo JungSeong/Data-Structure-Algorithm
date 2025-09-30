@@ -1,61 +1,44 @@
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include <algorithm>
-#include <iostream>
 
 using namespace std;
 
-vector<int> enter_list;
+int answer[8] = {0};
+int max_cnt = 0;
 
-void exploration(int k, int cnt, unordered_map<string, int>& info)
+void enter_dungeon(int k, int cnt, vector<vector<int>>& dungeons)
 {
-    bool canEnter = false;
+    bool canJoin = false;
 
-    for (auto [key, val] : info)
+    for (int i=0; i<dungeons.size(); i++)
     {
-        auto min_health = stoi(key.substr(0, key.find("_")));
-
-        if (k >= min_health && val > 0)
-        {
-            canEnter = true;
-            break;
-        }
+        if (k >= dungeons[i][0] && answer[i]) {canJoin = true; break;}
     }
 
-    if (!canEnter)
+    if (!canJoin)
     {
-        enter_list.push_back(cnt);
+        max_cnt = max(max_cnt, cnt);
         return;
     }
 
-    for (auto& [key, val]: info)
+    for (int i=0; i<dungeons.size(); i++)
     {
-        auto min_health = stoi(key.substr(0, key.find("_")));
-        auto minus_health = stoi(key.substr(key.find("_")+1));
-        if (k >= min_health && val>0)
+        if (k >= dungeons[i][0] && answer[i]>0)
         {
-            k -= minus_health;
-            val--;
-            exploration(k, cnt+1, info);
-            val++;
-            k += minus_health;
+            answer[i]=0;
+            enter_dungeon(k-dungeons[i][1], cnt+1, dungeons);
+            answer[i]=1;
         }
     }
 }
 
 int solution(int k, vector<vector<int>> dungeons) {
-    unordered_map<string, int> info;    
-
-    for (auto elem : dungeons)
+    for (int i=0; i<dungeons.size(); i++)
     {
-        string element = to_string(elem[0])+"_"+to_string(elem[1]);
-        info[element]++;
+        answer[i] = 1;
     }
 
-    exploration(k, 0, info);
+    enter_dungeon(k, 0, dungeons);
 
-    sort(enter_list.begin(), enter_list.end());
-
-    return enter_list.back();
+    return max_cnt;
 }
