@@ -13,5 +13,5 @@ jobs:
        uses: peter-evans/repository-dispatch@v1
        with:
          token: ${{ secrets.GH_PAT }}
-         repository: JungSeong/PROGRAMMERS-BADGE
+         repository: JungSeong/PROGRAMMERS_BADGE
          event-type: trigger-workflow
