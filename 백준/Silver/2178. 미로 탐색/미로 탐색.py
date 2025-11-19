@@ -1,28 +1,25 @@
 from collections import deque
 import sys
+
 input = sys.stdin.readline
-
 N, M = map(int, input().split())
-m = [list(map(int, input().strip())) for i in range(N)]
-visited = [[False] * M for i in range(N)]
+m = [list(map(int, input().strip())) for _ in range(N)]
+move = [[-1,0],[0,1],[1,0],[0,-1]] #상,우,하,좌
 
-move = [[-1,0],[0,1],[1,0],[0,-1]] # 상,하,좌,우
-
-def BFS(r, c, cnt) :
+def BFS(r, c) :
     q = deque()
-    q.append([r, c, cnt])
+    q.append([r, c])
 
-    while True :
-        start_r, start_c, cnt = q.popleft()
-        if start_r == N-1 and start_c == M-1 :
-            print(cnt)
+    while q :
+        cur_r, cur_c = q.popleft()
+        if cur_r == N-1 and cur_c == M-1 :
+            print(m[cur_r][cur_c])
             break
         for row in move :
-            dr, dc = row[0], row[1]
-            new_r = start_r+dr
-            new_c = start_c+dc
-            if 0<=new_r<N and 0<=new_c<M and m[new_r][new_c] == 1 and visited[new_r][new_c] != True:
-                visited[new_r][new_c] = True
-                q.append([start_r+dr, start_c+dc, cnt+1])
+            next_r = cur_r + row[0]
+            next_c = cur_c + row[1]
+            if 0<=next_r<N and 0<=next_c<M and m[next_r][next_c] == 1 :
+                m[next_r][next_c] = m[cur_r][cur_c] + 1
+                q.append([next_r,next_c])
 
-BFS(0,0,1)
+BFS(0,0)
