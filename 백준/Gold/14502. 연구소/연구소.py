@@ -21,7 +21,7 @@ move = [[-1,0],[0,1],[1,0],[0,-1]]
 
 def BackTracking(cnt, start_idx) :
     if cnt == 3 : # 벽이 다 채워짐
-        m2 = copy.deepcopy(m)
+        m2 = [row[:] for row in m]
         safe = 0
         for row in start :
             cur_r, cur_c = row[0], row[1]
