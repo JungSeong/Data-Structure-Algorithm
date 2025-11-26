@@ -5,23 +5,25 @@ N = int(input())
 m = [list(map(int, input().split())) for _ in range(N)]
 cnt = [0,0,0] # -1, 0, 1
 
-def paper(row, col, N) :
-    init = m[row][col]
-    for i in range(row, row+N) :
-        for j in range(col, col+N) :
-            if m[i][j] != init :
-                h = N//3
-                for k in range(3) :
-                    for l in range(3) :
-                        paper(row+k*h, col+l*h, h)
-                return
-
-    if init == -1 :
-        cnt[0] += 1
-    elif init == 0 :
-        cnt[1] += 1
+def Paper(row, col, N) :
+    idx = m[row][col]+1
+    if N == 1 :
+        cnt[idx] += 1
     else :
-        cnt[2] += 1
+        init = m[row][col]
+        isOK = True
+        for i in range(row, row+N) :
+            for j in range(col, col+N) :
+                if init != m[i][j] :
+                    isOK = False
+                    break
+        if isOK :
+            cnt[idx] += 1
+        else :
+            for i in range(3) :
+                for j in range(3) :
+                    Paper(row+i*N//3, col+j*N//3, N//3)
 
-paper(0, 0, N)
-for i in cnt : print(i)
+Paper(0, 0, N)
+for i in cnt :
+    print(i)
