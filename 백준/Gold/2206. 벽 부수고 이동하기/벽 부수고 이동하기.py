@@ -1,34 +1,31 @@
 import sys
 from collections import deque
-input = sys.stdin.readline
+INPUT = sys.stdin.readline
 
-N, M = map(int, input().split())
-m = [list(map(int, input().strip())) for _ in range(N)]
-move = [[-1,0], [0,1], [1,0], [0,-1]]
+N, M = map(int, INPUT().split())
+l = [list(map(int, INPUT().strip())) for _ in range(N)]
+m = [[row[:] for row in l] for _ in range(2)]
+cur_r, cur_c = 0, 0
+move = [(-1,0),(0,1),(1,0),(0,-1)]
 
-def BFS() :
+def BFS(cur_r, cur_c) :
     q = deque()
-    cur_r, cur_c, broken = 0, 0, 0
-    q.append([cur_r, cur_c, broken])
-    visited = [[[0] * 2 for _ in range(M)] for _ in range(N)] # 0열 : 하나도 부수지 않은 세상, 1열 : 하나 부순 세상
-    visited[cur_r][cur_c][0] = visited[cur_r][cur_c][1] = 1
+    m[1][cur_r][cur_c] = 1
+    q.append([cur_r, cur_c, 1])
 
     while q :
-        cur_r, cur_c, broken = q.popleft()
+        cur_r, cur_c, cnt = q.popleft()
         if cur_r == N-1 and cur_c == M-1 :
-            print(visited[cur_r][cur_c][broken])
+            print(m[cnt][cur_r][cur_c])
             return
-        for row in move :
-            new_r = cur_r + row[0]
-            new_c = cur_c + row[1]
+        for dr, dc in move :
+            new_r, new_c = cur_r+dr, cur_c+dc
             if 0<=new_r<N and 0<=new_c<M :
-                if m[new_r][new_c] == 0 and visited[new_r][new_c][broken] == 0 : # 벽이 아니고 방문 안함
-                    visited[new_r][new_c][broken] = visited[cur_r][cur_c][broken] + 1
-                    q.append([new_r, new_c, broken])
-                if m[new_r][new_c] == 1 and broken == 0 : # 벽이고 하나 더 부술 수 있음
-                    visited[new_r][new_c][1] = visited[cur_r][cur_c][broken] + 1
-                    q.append([new_r, new_c, 1])
-
+                if cnt == 1 and m[1][new_r][new_c] == 1 :
+                    m[0][new_r][new_c] = m[cnt][cur_r][cur_c] + 1
+                    q.append([new_r, new_c, cnt-1])
+                if m[cnt][new_r][new_c] == 0 :
+                    m[cnt][new_r][new_c] = m[cnt][cur_r][cur_c] + 1
+                    q.append([new_r, new_c, cnt])
     print(-1)
-
-BFS()
+BFS(cur_r, cur_c)
