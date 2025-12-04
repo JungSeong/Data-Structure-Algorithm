@@ -1,16 +1,13 @@
 import sys
-input = sys.stdin.readline
+from itertools import combinations
+INPUT = sys.stdin.readline
 
-N, M = map(int, input().split())
-comb = []
+N, M = map(int, INPUT().split())
+l = []
+for i in range(1, N+1) :
+    l.append(i)
 
-def BFS(l, cur) :
-    if l == M :
-        print(' '.join(comb))
-        return
-    for i in range(cur, N+1) :
-        comb.append(str(i))
-        BFS(l+1, i+1)
-        comb.pop()
+comb = combinations(l, M)
 
-BFS(0, 1)
+for row in comb :
+    print(' '.join(map(str, row)))
