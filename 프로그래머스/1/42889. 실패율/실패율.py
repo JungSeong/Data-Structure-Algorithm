@@ -18,7 +18,7 @@ def solution(N, stages):
         if total_person[i] == 0 :
             failed_rate[i] = 0.0
         else :
-            failed_rate[i] = decimal.Decimal(failed_person[i]) / decimal.Decimal(total_person[i]) # 이것도 잘 몰랐음
+            failed_rate[i] = failed_person[i] / total_person[i] # 이것도 잘 몰랐음
         
     val = sorted(failed_rate.items(), key=lambda x : (-x[1], x[0])) # 이거 잘 몰랐음
     for col in val :
