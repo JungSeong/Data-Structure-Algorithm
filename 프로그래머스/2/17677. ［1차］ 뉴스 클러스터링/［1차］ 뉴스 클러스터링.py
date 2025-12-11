@@ -1,34 +1,27 @@
-from collections import defaultdict
+from collections import Counter
+
+def str_to_counter(str) :
+    s = []
+    for i in range(len(str)-1) :
+        ch = str[i:i+2]
+        ch = ch.upper()
+        if ch.isalpha() :
+            s.append(ch)
+            
+    c = Counter(s)  
+    return c 
 
 def solution(str1, str2):
     answer = 0
-    set1 = defaultdict(int)
-    set2 = defaultdict(int)
-    keys = set()
-
-    for i in range(len(str1)-1) :
-        ch = str1[i]+str1[i+1]
-        CH = ch.upper()
-        if 'A'<=CH[0]<='Z' and 'A'<=CH[1]<='Z' :
-            set1[CH] += 1
-            keys.add(CH)
+    counter1 = str_to_counter(str1)
+    counter2 = str_to_counter(str2)
     
-    for i in range(len(str2)-1) :
-        ch = str2[i]+str2[i+1]
-        CH = ch.upper()
-        if 'A'<=CH[0]<='Z' and 'A'<=CH[1]<='Z' :
-            set2[CH] += 1
-            keys.add(CH)
+    union_set = list((counter1|counter2).elements())
+    intersect_set = list((counter1&counter2).elements())
     
-    gyo, hap = 0, 0
-    for k in keys :
-        gyo += min(set1[k], set2[k])
-        hap += max(set1[k], set2[k])
-    
-    # 둘 다 공집합
-    if gyo == 0 and hap == 0 :
-        answer = 65536
+    if len(intersect_set) == 0 and len(union_set) == 0 :
+        answer = 65536    
     else :
-        answer = int(gyo/hap*65536)
+        answer = int(len(intersect_set)/len(union_set)*65536)
     
     return answer
