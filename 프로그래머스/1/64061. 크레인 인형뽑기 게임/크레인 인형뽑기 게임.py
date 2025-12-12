@@ -1,22 +1,25 @@
 def solution(board, moves):
     answer = 0
-    moves = list(map(lambda x : x-1, moves))
-    board = list(map(list, zip(*board)))
-    basket = []
+    board_T = list(map(list, zip(*board)))
+    s = []
+    moves = map(lambda x : x-1, moves)
+    N, M = len(board), len(board[0])
+    cnt = 0
     
-    for row in board :
-        row.reverse()
-    
-    for col in moves :
-        for i in range(len(board[0])-1, -1, -1) :
-            if board[col][i] != 0 :
-                popped_doll = board[col][i]
-                board[col][i] = 0
-                basket.append(popped_doll)
+    for row in moves :
+        for i in range(M) :
+            if board_T[row][i] != 0 :
+                popped = board_T[row][i]
+                board_T[row][i] = 0
+                s.append(popped)
                 break
-        if len(basket) >= 2 and basket[-1] == basket[-2] :
-            basket.pop()
-            basket.pop()
-            answer += 2
-
+        
+        if len(s) >= 2 :
+            if s[-1] == s[-2] :
+                s.pop()
+                s.pop()
+                cnt += 2
+                
+    answer = cnt
+    
     return answer
