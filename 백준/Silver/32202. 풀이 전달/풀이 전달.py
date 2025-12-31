@@ -1,14 +1,15 @@
 import sys
 input = sys.stdin.readline
+mod = 10**9+7
 
 N = int(input())
-dp = [[0]*2 for _ in range(N)]
-
-dp[0][0] = 2
-dp[0][1] = 1
+a = 2
+b = 1
 
 for i in range(1, N) :
-    dp[i][0] = 2 * (dp[i-1][0] + dp[i-1][1]) % (10**9+7)
-    dp[i][1] = dp[i-1][0] % (10**9+7)
+    new_a = 2 * (a+b) % mod
+    new_b = a % mod
 
-print(sum(dp[-1]) % (10**9+7))
+    a, b = new_a, new_b
+
+print((a+b) % mod)
