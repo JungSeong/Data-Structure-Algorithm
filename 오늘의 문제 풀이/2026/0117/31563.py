@@ -15,14 +15,14 @@ for i in range(Q) :
 
 for query in queries :
     if query[0] == 1 :
-        start = (start + N - query[1]) % N
+        start = (start - query[1]) % N
     elif query[0] == 2 :
         start = (start + query[1]) % N
     else :
-        a, b = query[1]-1, query[2]
-        a = (a + start) % N
-        b = (b + start) % N
-        if a > b :
-            print(sum(A[a:N]) + sum(A[:b]))
+        a, b = query[1]-1, query[2]-1
+        a = (a+start) % N
+        b = (b+start) % N
+        if a <= b :
+            print(S[b+1]-S[a])
         else :
-            print()
+            print(S[-1]-S[a]+S[b+1])
