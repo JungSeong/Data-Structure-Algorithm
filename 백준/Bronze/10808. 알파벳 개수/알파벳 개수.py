@@ -1,13 +1,11 @@
 import sys
-from collections import Counter
 input = sys.stdin.readline
 
-S = input().rstrip()
-cnt = Counter(S)
-answer = []
+alphabet = input().rstrip()
+nums = [0]*26
 
-for i in range(ord('a'), ord('z')+1) :
-    ch = chr(i)
-    answer.append(cnt[ch])
+for ch in alphabet :
+    idx = ord(ch)-ord('a')
+    nums[idx] += 1
 
-print(' '.join(map(str, answer)))
+print(*nums)
