@@ -11,4 +11,4 @@ answer = 0
 for i in range(len(chr)) :
     answer += (ord(chr[i])-ord('a')+1)*(r**i)%M
 
-print(answer)
+print(answer%M)
