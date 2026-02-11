@@ -1,8 +1,13 @@
 import sys
 input = sys.stdin.readline
 
-while True :
-    try :
-        print(input())
-    except Exception as e :
-        break
+alphabet = input().rstrip()
+answer = []
+
+for ch in alphabet :
+    if ch.isupper() :
+        answer.append(ch.upper())
+    else :
+        answer.append(ch.lower())
+
+print(''.join(answer))
